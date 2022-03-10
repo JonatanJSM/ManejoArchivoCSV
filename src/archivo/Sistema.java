@@ -1,11 +1,14 @@
 package archivo;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Sistema{
-    VerificadorArchivo verificadorArchivo = new VerificadorArchivo();
+    VerificadorArchivo verificadorArchivo;
     
     public Sistema(String ruta, String nombre) throws IOException {
+        verificadorArchivo = new VerificadorArchivo(ruta,nombre);
         boolean aux = verificarArchivoUsuario(ruta, nombre);
         if(aux){
             aux = verificarArchivoVacio(ruta,nombre);
@@ -16,7 +19,6 @@ public class Sistema{
                 }else{
                    alertaArchivoMalEstructurado(); 
                 }
-                //probando
             }else{
                 alertaArchivoUsuarioVacio();
             }
@@ -60,7 +62,13 @@ public class Sistema{
     }
     
     public boolean verificarEstructuraArchivo(String ruta, String nombre) throws IOException{
-        return verificadorArchivo.verificarEstructuraArchivo(ruta, nombre);
+        try {
+            return verificadorArchivo.verificarEstructuraArchivo(2, ",",ruta,nombre);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Están mal las columnas");
+             System.exit(0);
+            return false;
+        }
     }
     
 }
