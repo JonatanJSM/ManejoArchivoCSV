@@ -1,14 +1,12 @@
 package archivo;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Sistema{
     VerificadorArchivo verificadorArchivo;
     
     public Sistema(String ruta, String nombre) throws IOException {
-        verificadorArchivo = new VerificadorArchivo(ruta,nombre);
+        verificadorArchivo = new VerificadorArchivo();
         boolean aux = verificarArchivoUsuario(ruta, nombre);
         if(aux){
             aux = verificarArchivoVacio(ruta,nombre);
@@ -28,7 +26,7 @@ public class Sistema{
         }
     }
 
-    public boolean verificarArchivoUsuario(String ruta, String nombre) throws IOException{
+    private boolean verificarArchivoUsuario(String ruta, String nombre) throws IOException{
         return verificadorArchivo.verificarExitenciaArchivo(ruta, nombre);
     }
 
@@ -57,15 +55,15 @@ public class Sistema{
     
     public void ingresarUusarioContrasenia(){}
     
-    public boolean verificarArchivoVacio(String ruta, String nombre) throws IOException{
+    private boolean verificarArchivoVacio(String ruta, String nombre) throws IOException{
         return verificadorArchivo.verificarArchivoVacio(ruta, nombre);
     }
     
-    public boolean verificarEstructuraArchivo(String ruta, String nombre) throws IOException{
+    private boolean verificarEstructuraArchivo(String ruta, String nombre) throws IOException{
         try {
             return verificadorArchivo.verificarEstructuraArchivo(2, ",",ruta,nombre);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Están mal las columnas");
+            JOptionPane.showMessageDialog(null, "Error en los elementos");
              System.exit(0);
             return false;
         }

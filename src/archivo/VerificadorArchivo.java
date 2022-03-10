@@ -6,11 +6,6 @@ import java.io.IOException;
 
 
 public class VerificadorArchivo{
-    private String ruta;
-    
-    public VerificadorArchivo(String ruta, String nombre){
-        this.ruta += "\\"+nombre;
-    }
     
     public boolean verificarExitenciaArchivo(String ruta, String nombre) throws IOException{
         ruta += "\\"+nombre;
@@ -25,12 +20,12 @@ public class VerificadorArchivo{
         public boolean verificarEstructuraArchivo(int elementos, String seperadorString,String ruta, String nombre) throws IOException, Exception{
         FileReader fr;
         ruta += "\\"+nombre;
-        String aux = "";
+        String aux;
         boolean archivoExitente = true;
         int i = 0; int j = 0;
         try{
             fr = new FileReader(ruta);
-            String linea = "";
+            String linea;
             BufferedReader buff = new BufferedReader(fr);
                 while((linea = buff.readLine()) != null){
                     String[] datoslinea = linea.split(seperadorString);
@@ -41,7 +36,6 @@ public class VerificadorArchivo{
                         }
                         i++;
                     }
-                    System.out.println("indice: "+i+" j "+j+" Elementos: "+elementos+" Linea: "+linea+" Cantidad datos: "+ datoslinea.length);
                     if(j != elementos){              
                         throw new Exception("mal");
                     }
