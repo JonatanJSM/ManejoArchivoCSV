@@ -27,22 +27,23 @@ public class VerificadorArchivo{
         ruta += "\\"+nombre;
         String aux = "";
         boolean archivoExitente = true;
-        int i=0;
+        int i = 0; int j = 0;
         try{
             fr = new FileReader(ruta);
             String linea = "";
             BufferedReader buff = new BufferedReader(fr);
                 while((linea = buff.readLine()) != null){
                     String[] datoslinea = linea.split(seperadorString);
-                    while(i<elementos){
+                    while(i<datoslinea.length){
                         aux = datoslinea[i];
                         if(!aux.equals("")){
-                            i++;
+                            j++;
                         }
+                        i++;
                     }
-                    System.out.println("indice: "+i+" Elementos: "+elementos);
-                    if(i-1 <elementos || i-1> elementos){              
-                        //throw new Exception("mal");
+                    System.out.println("indice: "+i+" j "+j+" Elementos: "+elementos+" Linea: "+linea+" Cantidad datos: "+ datoslinea.length);
+                    if(j != elementos){              
+                        throw new Exception("mal");
                     }
                 }
 
