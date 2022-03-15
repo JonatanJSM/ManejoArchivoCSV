@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class administadorUsuario {
     private ArrayList<Usuario> listaUsuario = new ArrayList<>();
     private ArrayList<String[]> lista = new ArrayList<>();
+    int contador;
     
     public administadorUsuario(int elementos,VerificadorArchivo e) {
         lista = e.getLista();
@@ -24,34 +25,40 @@ public class administadorUsuario {
         }
     }
     
-    public void verificarUsuarioContrasenia(String usuario, String contrasenia){
+    public boolean verificarUsuarioContrasenia(String usuario, String contrasenia){
+        boolean x = false;
         if(verificarUsuario(usuario)){
             if(verificarContrasenia(contrasenia)){
                 System.out.println("Correcto!");
+                x = true;
             }else{
                  System.out.println("Contraseña incorrecta");
             }
         }else{
             System.out.println("No hay usuario");
         }
+        return x;
     }
     
     public boolean verificarUsuario(String Usuario){
+        contador = 0;
+        int i=0;
        boolean x = false;
        for(Usuario usu : listaUsuario) {
             if(usu.getNombre().equals(Usuario)){
                 x = true;
+                contador = i;
             }
+            i++;
         }
+       
         return x;
     }
     
     public boolean verificarContrasenia(String contrasenia){
         boolean x = false;
-        for (Usuario usu : listaUsuario) {
-            if(usu.getContrasenia().equals(contrasenia)){
-                x = true;
-            }
+        if(listaUsuario.get(contador).getContrasenia().equals(contrasenia)){
+            x = true;
         }
         return x;        
     }

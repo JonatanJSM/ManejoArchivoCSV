@@ -16,8 +16,11 @@ public class Sistema{
                     mostrarInterfazUsuario();
                     administadorUsuario adminUsuario = new administadorUsuario(2,verificadorArchivo);
                     adminUsuario.imprimir();
-                    adminUsuario.verificarUsuarioContrasenia("c", "b");
-                    
+                    if(adminUsuario.verificarUsuarioContrasenia("Jafet", "abcd")){
+                        mostrarMeu();
+                    }else{
+                        alertaUsuarioIncorrecto();
+                    }
                 }else{
                    alertaArchivoMalEstructurado(); 
                 }
@@ -40,7 +43,9 @@ public class Sistema{
 
     public void verificarUsuarioContrasena(){}
 
-    public void mostrarMeu(){}
+    public void mostrarMeu(){
+        System.out.println("Hola, se ha ingresado");
+    }
     
     private void alertaArchivoUsuarioNoexiste(){
         JOptionPane.showMessageDialog(null, "Error, no se encontro el archivo");
@@ -71,6 +76,10 @@ public class Sistema{
              System.exit(0);
             return false;
         }
+    }
+    
+    private void alertaUsuarioIncorrecto(){
+        System.out.println("Perdedor");
     }
     
 }
