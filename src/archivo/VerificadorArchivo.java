@@ -12,13 +12,7 @@ public class VerificadorArchivo{
     public ArrayList<String[]> getLista() {
         return lista;
     }
-    
-    public void imprimri (){
-        String aux[];
-        aux = lista.get(0);
-        System.out.println("probando"+aux[1]);
-    }   
-    
+        
     public boolean verificarExitenciaArchivo(String ruta, String nombre) throws IOException{
         ruta += "\\"+nombre;
         boolean archivoExitente = true;
@@ -33,7 +27,6 @@ public class VerificadorArchivo{
         FileReader fr;
         ruta += "\\"+nombre;
         String aux;
-        String arregloaux[] = new String[elementos];
         boolean archivoExitente = true;
         try{
             fr = new FileReader(ruta);
@@ -44,18 +37,16 @@ public class VerificadorArchivo{
                     int i = 0; int j = 0;
                     while(i<datoslinea.length){
                         aux = datoslinea[i];
-                        arregloaux[i] = datoslinea[i];
-                        System.out.println("E "+i+arregloaux[i]);
                         if(!aux.equals("")){
                             j++;
                         }
                         i++;
                     }
-                    lista.add(arregloaux);
+                    lista.add(datoslinea);
                     if(j != elementos){              
                         throw new Exception("mal");
-                    }
-                }
+                    } 
+                }   
         }catch(ArrayIndexOutOfBoundsException a){
             archivoExitente = false;
         }

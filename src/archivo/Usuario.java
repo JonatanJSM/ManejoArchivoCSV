@@ -14,5 +14,10 @@ public class Usuario {
         this.nombre = nombre;
         this.contrasenia = contrasenia;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "nombre=" + nombre + ", contrasenia=" + contrasenia + ", estado=" + estado + ", tiempo=" + tiempo + '}';
+    }
     
 }

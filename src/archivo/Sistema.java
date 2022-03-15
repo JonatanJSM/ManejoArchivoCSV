@@ -3,7 +3,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class Sistema{
-    VerificadorArchivo verificadorArchivo;
+    private VerificadorArchivo verificadorArchivo;
     
     public Sistema(String ruta, String nombre) throws IOException {
         verificadorArchivo = new VerificadorArchivo();
@@ -14,8 +14,9 @@ public class Sistema{
                 aux = verificarEstructuraArchivo(ruta,nombre);
                 if(aux){
                     mostrarInterfazUsuario();
-                    administadorUsuario admin = new administadorUsuario();
-                    verificadorArchivo.imprimri();
+                    administadorUsuario sk = new administadorUsuario(2,verificadorArchivo);
+                    sk.imprimir();
+                    
                 }else{
                    alertaArchivoMalEstructurado(); 
                 }
