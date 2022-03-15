@@ -8,45 +8,67 @@ import java.util.ArrayList;
  */
 public class administadorUsuario {
     private ArrayList<Usuario> listaUsuario = new ArrayList<>();
+    private ArrayList<String[]> lista = new ArrayList<>();
     
     public administadorUsuario(int elementos,VerificadorArchivo e) {
+        lista = e.getLista();
+        crearUsuario();
+    }
+        
+    public final void crearUsuario(){
         String aux[];
-        for(int i=0; i<e.getLista().size(); i++){
-            aux = e.getLista().get(i);
+        for(int i=0; i<lista.size(); i++){
+            aux = lista.get(i);
             Usuario usuariooo = new Usuario(aux[0],aux[1]);
             listaUsuario.add(usuariooo);
         }
     }
     
-    public void imprimir(){
-        for(int i=0; i<listaUsuario.size(); i++){
-            System.out.println(listaUsuario.get(i));
+    public void verificarUsuarioContrasenia(String usuario, String contrasenia){
+        if(verificarUsuario(usuario)){
+            if(verificarContrasenia(contrasenia)){
+                System.out.println("Correcto!");
+            }else{
+                 System.out.println("Contraseña incorrecta");
+            }
+        }else{
+            System.out.println("No hay usuario");
         }
     }
     
-    public void verificarUsuarioContrasenia(String usuario, String contrasenia){
-        
-    }
-    
-    public void crearUsuario(String lista[]){
-        
-    }
-    
     public boolean verificarUsuario(String Usuario){
-        return false;
+       boolean x = false;
+       for(Usuario usu : listaUsuario) {
+            if(usu.getNombre().equals(Usuario)){
+                x = true;
+            }
+        }
+        return x;
     }
+    
+    public boolean verificarContrasenia(String contrasenia){
+        boolean x = false;
+        for (Usuario usu : listaUsuario) {
+            if(usu.getContrasenia().equals(contrasenia)){
+                x = true;
+            }
+        }
+        return x;        
+    }
+    
     
     public boolean verificarUsuariobloqueado(String usuario){
         return false;
     }
     
-    public boolean verificarContrasenia(String contrasenia){
-        return false;
+    public void cambiarEstatusUsuario(String  usuario){
         
     }
     
-    public void cambiarEstatusUsuario(String  usuario){
-        
+    public void imprimir(){
+        for(int i=0; i<lista.size(); i++){
+            System.out.println(listaUsuario.get(i));
+        }
     }
 }
 

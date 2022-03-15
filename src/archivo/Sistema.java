@@ -14,8 +14,9 @@ public class Sistema{
                 aux = verificarEstructuraArchivo(ruta,nombre);
                 if(aux){
                     mostrarInterfazUsuario();
-                    administadorUsuario sk = new administadorUsuario(2,verificadorArchivo);
-                    sk.imprimir();
+                    administadorUsuario adminUsuario = new administadorUsuario(2,verificadorArchivo);
+                    adminUsuario.imprimir();
+                    adminUsuario.verificarUsuarioContrasenia("c", "b");
                     
                 }else{
                    alertaArchivoMalEstructurado(); 
