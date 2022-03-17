@@ -3,7 +3,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 public class Sistema{
-    private VerificadorArchivo verificadorArchivo;
+    private static VerificadorArchivo verificadorArchivo;
     
     public Sistema(String ruta, String nombre) throws IOException {
         verificadorArchivo = new VerificadorArchivo();
@@ -16,7 +16,7 @@ public class Sistema{
                     mostrarInterfazUsuario();
                     administadorUsuario adminUsuario = new administadorUsuario(2,verificadorArchivo);
                     adminUsuario.imprimir();
-                    if(adminUsuario.verificarUsuarioContrasenia("Jafet", "abcd")){
+                    if(adminUsuario.verificarUsuarioContrasenia()){
                         mostrarMeu();
                     }else{
                         alertaUsuarioIncorrecto();
@@ -81,5 +81,7 @@ public class Sistema{
     private void alertaUsuarioIncorrecto(){
         System.out.println("Perdedor");
     }
+    
+
     
 }

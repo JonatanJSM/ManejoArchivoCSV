@@ -1,6 +1,7 @@
 package archivo;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -15,6 +16,15 @@ public class administadorUsuario {
         lista = e.getLista();
         crearUsuario();
     }
+    
+    
+    
+    
+    public void imprimir(){
+        for(int i=0; i<lista.size(); i++){
+            System.out.println(listaUsuario.get(i));
+        }
+    }
         
     public final void crearUsuario(){
         String aux[];
@@ -25,8 +35,11 @@ public class administadorUsuario {
         }
     }
     
-    public boolean verificarUsuarioContrasenia(String usuario, String contrasenia){
+    public boolean verificarUsuarioContrasenia(){
         boolean x = false;
+        Scanner teclado = new Scanner(System.in);
+        String usuario = teclado.nextLine();
+        String contrasenia = teclado.nextLine();
         if(verificarUsuario(usuario)){
             if(verificarContrasenia(contrasenia)){
                 System.out.println("Correcto!");
@@ -72,10 +85,5 @@ public class administadorUsuario {
         
     }
     
-    public void imprimir(){
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(listaUsuario.get(i));
-        }
-    }
 }
 
