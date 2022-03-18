@@ -9,12 +9,13 @@ import java.util.Date;
 public class Usuario {
     private String nombre;
     private String contrasenia;
-    private String estado;
+    private boolean estado;
     private int intentos;
     private long tiempoBloqueo;
-    //NB no bloqueado, SB bloqueado
+    //false  = no bloqueado
+    // true = bloqueado
     public Usuario(String nombre, String contrasenia) {
-        this.estado = "NB";
+        this.estado = false;
         this.intentos = 0;
         this.tiempoBloqueo = 0;
         this.nombre = nombre;
@@ -24,10 +25,6 @@ public class Usuario {
     public String getNombre() {
         return nombre;
     }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
     
     @Override
     public String toString() {
@@ -36,26 +33,33 @@ public class Usuario {
     
     public boolean verificarContrasenia(String contrasenia){
         if(this.contrasenia.equals(contrasenia)){
+            System.out.println("Correcto");
             return true;
         }else{
-            intentos++;
-            if(!(intentos<3)){
-                estado = "SB";
-            }
+            bloquearUsuario();
             return false;
         }
     }
     
-    public String verificarEstado(){
-         if(estado.equals("NB")){
-             return "NB";
+    public void bloquearUsuario(){
+        intentos++;
+        System.out.println("inCorrecto");
+        if(!(intentos<3)){
+            System.out.println("Se bloqueo el usuario");
+            this.estado = true;
+        }
+    }
+    
+    public boolean verificarEstado(){
+         if(estado){
+             return true;
          }else{
              if(verificarTiempoRestanteBloque()){
                  //Se desbloquea
-                 estado = "NB";
-                 return "NB";
+                 estado = false;
+                 return false;
              }else{
-                 return "SB";
+                 return true;
              }
          }
     }

@@ -21,27 +21,30 @@ public class administadorUsuario {
         String aux[];
         for(int i=0; i<lista.size(); i++){
             aux = lista.get(i);
-            Usuario usuariooo = new Usuario(aux[0],aux[1]);
-            listaUsuario.add(usuariooo);
+            listaUsuario.add(new Usuario(aux[0],aux[1]));
         }
     }
     
-    public boolean verificarUsuarioContrasenia(){
-        boolean x = false;
+    public void verificarUsuarioContrasenia(){
         Scanner teclado = new Scanner(System.in);
+        
+        System.out.println("Ingresar usuario: ");
         String usuario = teclado.nextLine();
-        String contrasenia = teclado.nextLine();
+     
         if(verificarUsuario(usuario)){
-            if(verificarContrasenia(contrasenia)){
-                System.out.println("Correcto!");
-                x = true;
+            if(!listaUsuario.get(contador).verificarEstado()){
+                System.out.println("Ingresar contraseña: "+listaUsuario.get(contador).getNombre());
+                String contrasenia = teclado.nextLine();
+                while(!verificarContrasenia(contrasenia) && !listaUsuario.get(contador).verificarEstado()){
+                    System.out.println("Ingresar contraseña: "+listaUsuario.get(contador).getNombre());
+                    contrasenia = teclado.nextLine();
+                }
             }else{
-                 System.out.println("Contraseña incorrecta");
+                System.out.println("Está bloqueado");
             }
         }else{
             System.out.println("No hay usuario");
         }
-        return x;
     }
     
     public boolean verificarUsuario(String Usuario){
@@ -61,12 +64,11 @@ public class administadorUsuario {
     
     public boolean verificarContrasenia(String contrasenia){
         boolean x = false;
-        if(listaUsuario.get(contador).getContrasenia().equals(contrasenia)){
+        if(listaUsuario.get(contador).verificarContrasenia(contrasenia)){
             x = true;
         }
         return x;        
     }
-    
     
     public boolean verificarUsuariobloqueado(String usuario){
         return false;

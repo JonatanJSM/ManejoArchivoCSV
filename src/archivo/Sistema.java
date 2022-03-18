@@ -15,11 +15,7 @@ public class Sistema{
                 if(aux){
                     mostrarInterfazUsuario();
                     administadorUsuario adminUsuario = new administadorUsuario(2,verificadorArchivo);
-                    if(adminUsuario.verificarUsuarioContrasenia()){
-                        mostrarMeu();
-                    }else{
-                        alertaUsuarioIncorrecto();
-                    }
+                    adminUsuario.verificarUsuarioContrasenia();
                 }else{
                    alertaArchivoMalEstructurado(); 
                 }
@@ -75,12 +71,5 @@ public class Sistema{
              System.exit(0);
             return false;
         }
-    }
-    
-    private void alertaUsuarioIncorrecto(){
-        System.out.println("Perdedor");
-    }
-    
-
-    
+    }    
 }
