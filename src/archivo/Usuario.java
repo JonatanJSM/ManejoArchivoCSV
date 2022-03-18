@@ -9,9 +9,9 @@ import java.util.Date;
 public class Usuario {
     private String nombre;
     private String contrasenia;
-    private boolean estado;
-    private int intentos;
-    private long tiempoBloqueo;
+    private boolean estado = false;
+    private int intentos = 0;
+    private long tiempoBloqueo = 0;
     //false  = no bloqueado
     // true = bloqueado
     public Usuario(String nombre, String contrasenia) {
@@ -22,18 +22,33 @@ public class Usuario {
         this.contrasenia = contrasenia;
     }
 
+    public Usuario(String nombre, String contrasenia, boolean estado, int intentos, long tiempoBloqueo) {
+        this.nombre = nombre;
+        this.contrasenia = contrasenia;
+        this.estado = estado;
+        this.intentos = intentos;
+        this.tiempoBloqueo = tiempoBloqueo;
+    }
+    
     public String getNombre() {
         return nombre;
     }
-    
-    @Override
-    public String toString() {
-        return "Usuario{" + "nombre=" + nombre + ", contrasenia=" + contrasenia + '}';
+
+    public long getTiempoBloqueo() {
+        return tiempoBloqueo;
     }
     
+    
+
+    @Override
+    public String toString() {
+        return  nombre+","+contrasenia+","+estado+","+intentos+","+tiempoBloqueo;
+    }
+        
     public boolean verificarContrasenia(String contrasenia){
         if(this.contrasenia.equals(contrasenia)){
             System.out.println("Correcto");
+            intentos = 0;
             return true;
         }else{
             bloquearUsuario();
@@ -46,17 +61,20 @@ public class Usuario {
         System.out.println("inCorrecto");
         if(!(intentos<3)){
             System.out.println("Se bloqueo el usuario");
+            Date fecha = new Date();
+            tiempoBloqueo = fecha.getTime();
             this.estado = true;
         }
     }
     
     public boolean verificarEstado(){
-         if(estado){
-             return true;
+         if(estado == false){
+             return false;
          }else{
-             if(verificarTiempoRestanteBloque()){
+             if(verificarTiempoRestanteBloque()==false){
                  //Se desbloquea
                  estado = false;
+                 intentos = 0;
                  return false;
              }else{
                  return true;
@@ -69,9 +87,11 @@ public class Usuario {
         long x = fecha.getTime() - tiempoBloqueo;
         if(x<600000){
             //Aun bloqueado
-            return false;
-        }else{
+            //System.out.print("aquí");
             return true;
+        }else{
+            //System.out.print("o aquí");
+            return false;
         }
     }
         

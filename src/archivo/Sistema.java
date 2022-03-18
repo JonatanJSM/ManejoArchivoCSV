@@ -65,7 +65,7 @@ public class Sistema{
     
     private boolean verificarEstructuraArchivo(String ruta, String nombre) throws IOException{
         try {
-            return verificadorArchivo.verificarEstructuraArchivo(2, ",",ruta,nombre);
+            return verificadorArchivo.verificarEstructuraArchivo(5, ",",ruta,nombre);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error en los elementos");
              System.exit(0);

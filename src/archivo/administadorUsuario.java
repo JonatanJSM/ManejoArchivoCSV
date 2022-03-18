@@ -1,6 +1,8 @@
 package archivo;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -21,26 +23,28 @@ public class administadorUsuario {
         String aux[];
         for(int i=0; i<lista.size(); i++){
             aux = lista.get(i);
-            listaUsuario.add(new Usuario(aux[0],aux[1]));
+            listaUsuario.add(new Usuario(aux[0],aux[1],Boolean.parseBoolean(aux[2]),Integer.parseInt(aux[3]),Long.parseLong(aux[4])));
         }
     }
     
-    public void verificarUsuarioContrasenia(){
+    public void verificarUsuarioContrasenia() throws IOException{
         Scanner teclado = new Scanner(System.in);
         
         System.out.println("Ingresar usuario: ");
         String usuario = teclado.nextLine();
      
         if(verificarUsuario(usuario)){
-            if(!listaUsuario.get(contador).verificarEstado()){
+            if(listaUsuario.get(contador).verificarEstado() == false){
                 System.out.println("Ingresar contraseña: "+listaUsuario.get(contador).getNombre());
                 String contrasenia = teclado.nextLine();
                 while(!verificarContrasenia(contrasenia) && !listaUsuario.get(contador).verificarEstado()){
                     System.out.println("Ingresar contraseña: "+listaUsuario.get(contador).getNombre());
                     contrasenia = teclado.nextLine();
                 }
+                VerificadorArchivo.actualizarDatosdeUsuarios(listaUsuario);
             }else{
                 System.out.println("Está bloqueado");
+                System.out.println("Bloqueado el: " +new Date(listaUsuario.get(contador).getTiempoBloqueo()));
             }
         }else{
             System.out.println("No hay usuario");
@@ -69,14 +73,6 @@ public class administadorUsuario {
         }
         return x;        
     }
-    
-    public boolean verificarUsuariobloqueado(String usuario){
-        return false;
-    }
-    
-    public void cambiarEstatusUsuario(String  usuario){
         
-    }
-    
 }
 

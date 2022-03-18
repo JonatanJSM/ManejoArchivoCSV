@@ -1,10 +1,12 @@
 package archivo;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-
 
 public class VerificadorArchivo{
     private ArrayList<String[]> lista = new ArrayList<>();
@@ -61,4 +63,17 @@ public class VerificadorArchivo{
         return buff.readLine() ==null;
     }
     
+    
+    public static void actualizarDatosdeUsuarios(ArrayList<Usuario> lista) throws IOException{
+        PrintWriter fileOut;
+        try{
+            fileOut = new PrintWriter(new FileWriter("archivomodificado.txt",false));
+            for(int i = 0; i< lista.size();i++){
+                fileOut.println(lista.get(i));
+            }
+            fileOut.close();
+        }catch(FileNotFoundException e){
+            System.out.println("Error: "+ e.getMessage());
+        }
+    }
 }
