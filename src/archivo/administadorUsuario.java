@@ -16,16 +16,7 @@ public class administadorUsuario {
         lista = e.getLista();
         crearUsuario();
     }
-    
-    
-    
-    
-    public void imprimir(){
-        for(int i=0; i<lista.size(); i++){
-            System.out.println(listaUsuario.get(i));
-        }
-    }
-        
+            
     public final void crearUsuario(){
         String aux[];
         for(int i=0; i<lista.size(); i++){
