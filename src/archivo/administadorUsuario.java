@@ -14,7 +14,7 @@ public class administadorUsuario {
     private ArrayList<String[]> lista = new ArrayList<>();
     int contador;
     
-    public administadorUsuario(int elementos,VerificadorArchivo e) {
+    public administadorUsuario(VerificadorArchivo e) {
         lista = e.getLista();
         crearUsuario();
     }
@@ -27,7 +27,8 @@ public class administadorUsuario {
         }
     }
     
-    public void verificarUsuarioContrasenia() throws IOException{
+    public boolean verificarUsuarioContrasenia() throws IOException{
+        boolean x = false;
         Scanner teclado = new Scanner(System.in);
         
         System.out.println("Ingresar usuario: ");
@@ -41,6 +42,9 @@ public class administadorUsuario {
                     System.out.println("Ingresar contraseña: "+listaUsuario.get(contador).getNombre());
                     contrasenia = teclado.nextLine();
                 }
+                if(verificarContrasenia(contrasenia)){
+                    x = true;
+                }
                 VerificadorArchivo.actualizarDatosdeUsuarios(listaUsuario);
             }else{
                 System.out.println("Está bloqueado");
@@ -49,6 +53,7 @@ public class administadorUsuario {
         }else{
             System.out.println("No hay usuario");
         }
+        return x;
     }
     
     public boolean verificarUsuario(String Usuario){

@@ -85,7 +85,9 @@ public class Usuario {
     public boolean verificarTiempoRestanteBloque(){
         Date fecha = new Date();
         long x = fecha.getTime() - tiempoBloqueo;
-        if(x<600000){
+        if(x<60000){
+            //600000 10 minutos
+            //60000  1 minuto
             //Aun bloqueado
             //System.out.print("aquí");
             return true;

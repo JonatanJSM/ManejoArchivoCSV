@@ -14,8 +14,10 @@ public class Sistema{
                 aux = verificarEstructuraArchivo(ruta,nombre);
                 if(aux){
                     mostrarInterfazUsuario();
-                    administadorUsuario adminUsuario = new administadorUsuario(2,verificadorArchivo);
-                    adminUsuario.verificarUsuarioContrasenia();
+                    administadorUsuario adminUsuario = new administadorUsuario(verificadorArchivo);
+                    if(adminUsuario.verificarUsuarioContrasenia()){
+                        mostrarMenu();
+                    }
                 }else{
                    alertaArchivoMalEstructurado(); 
                 }
@@ -38,7 +40,7 @@ public class Sistema{
 
     public void verificarUsuarioContrasena(){}
 
-    public void mostrarMeu(){
+    public void mostrarMenu(){
         System.out.println("Hola, se ha ingresado");
     }
     
