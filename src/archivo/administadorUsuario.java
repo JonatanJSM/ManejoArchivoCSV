@@ -1,9 +1,16 @@
 package archivo;
 
+import org.apache.commons.codec.binary.Base64;
 import java.io.IOException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,9 +21,15 @@ public class administadorUsuario {
     private ArrayList<String[]> lista = new ArrayList<>();
     int contador;
     
+    String LLAVE;
+    
     public administadorUsuario(VerificadorArchivo e) {
         lista = e.getLista();
         crearUsuario();
+    }
+
+    public administadorUsuario() {
+       
     }
             
     public final void crearUsuario(){
@@ -77,6 +90,25 @@ public class administadorUsuario {
             x = true;
         }
         return x;        
+    }
+    
+    public String ecode(String secretKey, String cadena) {
+        String encriptacion = "";
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] llavePassword = md5.digest(secretKey.getBytes("utf-8"));
+            byte[] BytesKey = Arrays.copyOf(llavePassword, 24);
+            SecretKey key = new SecretKeySpec(BytesKey, "DESede");
+            Cipher cifrado = Cipher.getInstance("DESede");
+            cifrado.init(Cipher.ENCRYPT_MODE, key);
+            byte[] plainTextBytes = cadena.getBytes("utf-8");
+            byte[] buf = cifrado.doFinal(plainTextBytes);
+            byte[] base64Bytes = Base64.encodeBase64(buf);
+            encriptacion = new String(base64Bytes);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Algo salió mal");
+        }
+        return encriptacion;
     }
         
 }
