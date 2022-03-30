@@ -47,7 +47,7 @@ public class Usuario {
         
     public boolean verificarContrasenia(String contrasenia){
         if(this.contrasenia.equals(contrasenia)){
-            System.out.println("Correcto");
+            System.out.println("");
             intentos = 0;
             return true;
         }else{
@@ -58,7 +58,7 @@ public class Usuario {
     
     public void bloquearUsuario(){
         intentos++;
-        System.out.println("inCorrecto");
+        System.out.println("incorrecto");
         if(!(intentos<3)){
             System.out.println("Se bloqueo el usuario");
             Date fecha = new Date();
@@ -89,10 +89,8 @@ public class Usuario {
             //600000 10 minutos
             //60000  1 minuto
             //Aun bloqueado
-            //System.out.print("aquí");
             return true;
         }else{
-            //System.out.print("o aquí");
             return false;
         }
     }

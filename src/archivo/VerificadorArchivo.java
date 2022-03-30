@@ -46,7 +46,7 @@ public class VerificadorArchivo{
                     }
                     lista.add(datoslinea);
                     if(j != elementos){              
-                        throw new Exception("mal");
+                        throw new Exception("Archivo mal estructurado");
                     } 
                 }   
         }catch(ArrayIndexOutOfBoundsException a){
@@ -67,7 +67,7 @@ public class VerificadorArchivo{
     public static void actualizarDatosdeUsuarios(ArrayList<Usuario> lista) throws IOException{
         PrintWriter fileOut;
         try{
-            fileOut = new PrintWriter(new FileWriter("archivomodificado.txt",false));
+            fileOut = new PrintWriter(new FileWriter("C:\\Users\\Jonatan\\Desktop\\dist\\archivomodificado.txt",false));
             for(int i = 0; i< lista.size();i++){
                 fileOut.println(lista.get(i));
             }

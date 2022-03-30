@@ -35,7 +35,7 @@ public class Sistema{
     }
 
     private void mostrarInterfazUsuario(){
-        System.out.println("Existe :D");
+        System.out.println("Se muestra interfaz usuario");
     }
 
     public void verificarUsuarioContrasena(){}

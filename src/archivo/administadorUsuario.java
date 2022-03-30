@@ -21,8 +21,6 @@ public class administadorUsuario {
     private ArrayList<String[]> lista = new ArrayList<>();
     int contador;
     
-    String LLAVE;
-    
     public administadorUsuario(VerificadorArchivo e) {
         lista = e.getLista();
         crearUsuario();
@@ -64,7 +62,7 @@ public class administadorUsuario {
                 System.out.println("Bloqueado el: " +new Date(listaUsuario.get(contador).getTiempoBloqueo()));
             }
         }else{
-            System.out.println("No hay usuario");
+            //System.out.println("Incorrecto");
         }
         return x;
     }
@@ -86,7 +84,10 @@ public class administadorUsuario {
     
     public boolean verificarContrasenia(String contrasenia){
         boolean x = false;
-        if(listaUsuario.get(contador).verificarContrasenia(contrasenia)){
+        String secretKey = "SomosProgramadores";
+        String cadenaAEncriptar = contrasenia;
+        String cadenaEncriptada = ecode(secretKey, cadenaAEncriptar);
+        if(listaUsuario.get(contador).verificarContrasenia(cadenaEncriptada)){
             x = true;
         }
         return x;        
