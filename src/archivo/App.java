@@ -4,6 +4,6 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) throws IOException {
-        Sistema sistemaUno = new Sistema("C:\\Users\\Jonatan\\Desktop\\dist","archivomodificado.txt");
+        Sistema sistemaUno = new Sistema("C:\\Users\\Public","archivomodificado.txt");
     }
 }

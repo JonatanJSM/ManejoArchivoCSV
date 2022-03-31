@@ -67,7 +67,7 @@ public class VerificadorArchivo{
     public static void actualizarDatosdeUsuarios(ArrayList<Usuario> lista) throws IOException{
         PrintWriter fileOut;
         try{
-            fileOut = new PrintWriter(new FileWriter("C:\\Users\\Jonatan\\Desktop\\dist\\archivomodificado.txt",false));
+            fileOut = new PrintWriter(new FileWriter("C:\\Users\\Public\\archivomodificado.txt",false));
             for(int i = 0; i< lista.size();i++){
                 fileOut.println(lista.get(i));
             }
