@@ -16,18 +16,19 @@ public class VerificadorArchivo{
     }
         
     public boolean verificarExitenciaArchivo(String ruta, String nombre) throws IOException{
-        ruta += "\\"+nombre;
+        ruta += nombre;
         boolean archivoExitente = true;
         File archivo = new File(ruta);
         if(!archivo.exists()){
             archivoExitente = false;
         }
+        //hola
         return archivoExitente;
     }
 
         public boolean verificarEstructuraArchivo(int elementos, String seperadorString,String ruta, String nombre) throws IOException, Exception{
         FileReader fr;
-        ruta += "\\"+nombre;
+        ruta += nombre;
         String aux;
         boolean archivoExitente = true;
         try{
@@ -57,7 +58,7 @@ public class VerificadorArchivo{
     
     public boolean verificarArchivoVacio(String ruta, String nombre) throws IOException{
         FileReader fr;
-        ruta += "\\"+nombre;
+        ruta += nombre;
         fr = new FileReader(ruta);
         BufferedReader buff = new BufferedReader(fr);
         return buff.readLine() ==null;
@@ -67,7 +68,7 @@ public class VerificadorArchivo{
     public static void actualizarDatosdeUsuarios(ArrayList<Usuario> lista) throws IOException{
         PrintWriter fileOut;
         try{
-            fileOut = new PrintWriter(new FileWriter("C:\\Users\\Public\\archivomodificado.txt",false));
+            fileOut = new PrintWriter(new FileWriter("/Usuarios/archivomodificado.txt",false));
             for(int i = 0; i< lista.size();i++){
                 fileOut.println(lista.get(i));
             }
